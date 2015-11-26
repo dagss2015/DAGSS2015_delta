@@ -30,7 +30,7 @@ public class MedicoDAO extends GenericoDAO<Medico> {
         return filtrarResultadoUnico(q);
     }
 
-    public List<Paciente> buscarPorNombre(String patron) {
+    public List<Medico> buscarPorNombre(String patron) {
         Query q = em.createQuery("SELECT m FROM Medico AS m "
                 + "  WHERE (m.nombre LIKE :patron) OR "
                 + "        (m.apellidos LIKE :patron)");

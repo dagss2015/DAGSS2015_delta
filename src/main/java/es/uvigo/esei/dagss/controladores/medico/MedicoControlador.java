@@ -110,7 +110,7 @@ public class MedicoControlador implements Serializable {
         }
         return destino;
     }
-
+    
     //Acciones
     public String doShowCita() {
         return "detallesCita";

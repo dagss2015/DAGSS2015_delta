@@ -11,14 +11,15 @@
         <ui:composition template="/plantillas/plantillaGlobal.xhtml">
 
             <ui:define name="tituloPagina">
-                tituloPagina
+                Menu principal de Medicos
             </ui:define>            
 
             <ui:define name="izquierda">
-                izquierda
+                <ui:include src="/medico/plantillas/menuMedico.xhtml"/>
             </ui:define>
 
             <ui:define name="contenido">
+                Bienvenido, #{medicoControlador.medicoActual.nombre}
             </ui:define>
         </ui:composition>
 
