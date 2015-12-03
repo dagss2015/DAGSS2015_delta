@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +21,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.Min;
 
 @Entity
+@DiscriminatorValue(value = "CITA")
 public class Cita implements Serializable {
 
     @Id
