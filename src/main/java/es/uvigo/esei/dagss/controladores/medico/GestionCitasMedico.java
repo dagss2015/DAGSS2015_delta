@@ -40,6 +40,7 @@ public class GestionCitasMedico implements Serializable{
 
     List<Cita> citas;
     Cita citaActual;
+    List<Cita> citasDone;
 
     public GestionCitasMedico() {
     }
@@ -47,7 +48,7 @@ public class GestionCitasMedico implements Serializable{
     @PostConstruct
     public void inicializar() {
         citas = citaDAO.getAll(null);
-        
+        citasDone = citaDAO.getAllDone(null);
     }
 
     /*
@@ -63,6 +64,14 @@ public class GestionCitasMedico implements Serializable{
 
     public void setCitas(List<Cita> citas) {
         this.citas = citas;
+    }
+    
+    public List<Cita> getCitasDone() {
+        return citasDone;
+    }
+
+    public void setCitasDone(List<Cita> citas) {
+        this.citasDone = citas;
     }
 
     public Cita getCitaActual() {
@@ -106,9 +115,12 @@ public class GestionCitasMedico implements Serializable{
 
     public void doGuardarEditado() {
         // Actualiza un centro de salud
+                System.out.println(citaActual.getPaciente().getNombre());
+
         citaActual = citaDAO.actualizar(citaActual);
         // Actualiza lista de centros de salud a mostrar
-        citas = citaDAO.buscarTodos();
+        citas = citaDAO.getAll(null);
+        citasDone = citaDAO.getAllDone(null);
     }
 
     public String doVolver() {

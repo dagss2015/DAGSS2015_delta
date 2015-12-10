@@ -32,5 +32,12 @@ public class CitaDAO  extends GenericoDAO<Cita>{
         return q.getResultList();
         */
     }
+    
+    public List<Cita> getAllDone(String fecha) {
+        Query q = em.createQuery("SELECT c FROM Cita AS c "
+                + "  WHERE c.fecha <= :fecha");
+        q.setParameter("fecha",Calendar.getInstance().getTime()); 
+        return q.getResultList();
+    }
     // Completar aqui
 }

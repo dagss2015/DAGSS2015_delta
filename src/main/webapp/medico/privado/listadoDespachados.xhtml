@@ -23,13 +23,13 @@
             <h:form id="formularioListadoCita">     
                 <p:panel>
                     <p:dataTable id="tablaListadoCita"
-                                 value="#{gestionCitasMedico.citas}"
+                                 value="#{gestionCitasMedico.citasDone}"
                                  var="cita" 
                                  selection="#{gestionCitasMedico.citaActual}"
                                  selectionMode="single"
                                  paginator="true" paginatorPosition="bottom" rows="10" rowKey="#{cita.id}">
 
-                       <p:ajax event="rowSelect"   update="botonVer botonFormularioAtencion botonEditar"/>
+                        <p:ajax event="rowSelect"   update="botonVer botonEditar"/>
 
                         <f:facet name="header">
                             <h:outputText value="Agena de hoy"/>
@@ -61,7 +61,6 @@
                         <f:facet name="footer">
                             <p:commandButton id="botonVer"    icon="ui-icon-search" value="Ver"    update=":formularioVer" oncomplete="PF('DialogoVer').show()" disabled="#{empty gestionCitasMedico.citaActual}"/>
                             <p:commandButton id="botonEditar" icon="ui-icon-pencil" value="Editar" update=":formularioEditar" oncomplete="PF('DialogoEditar').show()" disabled="#{empty gestionCitasMedico.citaActual}"/>
-                            <p:button id="botonFormularioAtencion" icon="ui-icon-pencil" value="Formulario Paciente" outcome="/medico/privado/formularioAtencionPaciente.xhtml" disabled="#{empty gestionCitasMedico.citaActual}"/>
                         </f:facet>
 
                     </p:dataTable>
