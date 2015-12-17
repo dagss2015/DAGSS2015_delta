@@ -9,7 +9,7 @@
     <ui:composition template="/plantillas/plantillaGlobal.xhtml">
 
         <ui:define name="tituloPagina">
-            Gestión de Citas
+            Formulario paciente
         </ui:define>
 
         <ui:define name="izquierda">
@@ -17,50 +17,61 @@
         </ui:define>
 
         <ui:define name="contenido">
-
             <h:messages  id="mensajesCita"/>
-
             <h:form id="formularioListadoCita">     
-                <p:panel>
-
-
+                <p:panelGrid  columns="2">
+                    <p:panel>
                         <p:panelGrid columns="2" rendered="#{gestionCitasMedico.citaActual != null}">
-                        <h:outputLabel value="ID:" for="id"/>
-                        <h:outputText id="id" value="#{gestionCitasMedico.citaActual.id}" />
+                            <h:outputLabel value="ID:" for="id"/>
+                            <h:outputText id="id" value="#{gestionCitasMedico.citaActual.id}" />
 
-                        <h:outputLabel value="Nombre:" for="nombre"/>
-                        <h:outputText id="nombre" value="#{gestionCitasMedico.citaActual.paciente.nombre}" />
+                            <h:outputLabel value="Nombre:" for="nombre"/>
+                            <h:outputText id="nombre" value="#{gestionCitasMedico.citaActual.paciente.nombre}" />
 
-                        <h:outputLabel value="Apellidos:" for="apellidos"/>
-                        <h:outputText id="apellidos" value="#{gestionCitasMedico.citaActual.paciente.apellidos}" />
+                            <h:outputLabel value="Apellidos:" for="apellidos"/>
+                            <h:outputText id="apellidos" value="#{gestionCitasMedico.citaActual.paciente.apellidos}" />
 
-                        <h:outputLabel value="DNI:" for="dni"/>
-                        <h:outputText id="dni" value="#{gestionCitasMedico.citaActual.paciente.dni}" />
+                            <h:outputLabel value="DNI:" for="dni"/>
+                            <h:outputText id="dni" value="#{gestionCitasMedico.citaActual.paciente.dni}" />
 
-                        <h:outputLabel value="Fecha:" for="fecha"/>
-                        <h:outputText id="fecha" value="#{gestionCitasMedico.citaActual.fecha}" >
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
+                            <h:outputLabel value="Fecha:" for="fecha"/>
+                            <h:outputText id="fecha" value="#{gestionCitasMedico.citaActual.fecha}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
 
-                        <h:outputLabel value="Telefono:" for="telefono"/>
-                        <h:outputText id="telefono" value="#{gestionCitasMedico.citaActual.paciente.telefono}" />
+                            <h:outputLabel value="Telefono:" for="telefono"/>
+                            <h:outputText id="telefono" value="#{gestionCitasMedico.citaActual.paciente.telefono}" />
 
-                        <h:outputLabel value="e-mail:" for="email"/>
-                        <h:outputText id="email" value="#{gestionCitasMedico.citaActual.paciente.email}" />
-                        
-                        <h:outputLabel value="Centro salud:" for="centrosalud"/>
-                        <h:outputText id="centrosalud" value="#{gestionCitasMedico.citaActual.estado}" />                
-                                               
-                        <h:outputLabel value="Fecha alta:" for="fechaalta"/>
-                        <h:outputText id="fechaalta" value="#{gestionMedicosControlador.medicoActual.fechaAlta}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>                        
-                    </p:panelGrid>
-                           
-                        
+                            <h:outputLabel value="e-mail:" for="email"/>
+                            <h:outputText id="email" value="#{gestionCitasMedico.citaActual.paciente.email}" />
 
-                </p:panel>
-            </h:form>         
+                            <h:outputLabel value="Estado:" for="estado"/>
+                            <p:selectOneMenu id="estado" value="#{gestionCitasMedico.citaActual.estado}"
+                                             converter="omnifaces.SelectItemsConverter">                
+                                <f:selectItems var="estadoCita" value="#{gestionCitasControlador.estadosCitas}"
+                                               itemValue="#{estadoCita}" itemLabel="#{estadoCita.etiqueta} (#{estadoCita.etiqueta})" />
+                            </p:selectOneMenu>                       
+                        </p:panelGrid>
+                    </p:panel>
+
+                    <p:panel>
+                            <p:panelGrid columns="2" rendered="#{gestionCitasMedico.citaActual != null}">
+
+                            <h:outputLabel value="Tratamiento" for="name" />
+                            
+                            <h:inputText id="name" value="#{medicoControlador.medicoActual.nombre}" title="NAME"/>
+                            </p:panelGrid>
+                            <h:commandButton value="Guardar" action="#{medicoControlador.doGuardar()}"/>
+                    <h:commandButton value="Eliminar" action="#{medicoControlador.doGuardar()}"/>
+                    </p:panel>
+                    
+                </p:panelGrid>
+                
+            </h:form>
+        </ui:define>
+
+        <ui:define name="derecha">
+            asd        
         </ui:define>
 
     </ui:composition>

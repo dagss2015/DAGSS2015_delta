@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/plantillas/plantillaGlobal.xhtml">
+
+        <ui:define name="tituloPagina">
+            Modifica tus datos
+        </ui:define>
+
+        <ui:define name="izquierda">
+            <ui:include src="/medico/plantillas/menuMedico.xhtml"/>                
+        </ui:define>
+
+        <ui:define name="contenido">
+                <h:form>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Nombre (*):" for="nombre" />
+                        <h:inputText id="nombre" value="#{medicoControlador.medicoActual.nombre}" title="Nombre" required="true" requiredMessage="Debe introducirse el nombre del medico"/>
+                        <h:message for="nombre"/>
+
+                        <h:outputLabel value="Apellidos (*):" for="apellidos" />
+                        <h:inputText id="apellidos" value="#{medicoControlador.medicoActual.apellidos}" title="Apellidos" required="true" requiredMessage="Deben introducirse los apellidos del medico"/>
+                        <h:message for="apellidos"/>
+                        
+                        <h:outputLabel value="DNI (*):" for="dni" />
+                        <h:inputText id="dni" value="#{medicoControlador.medicoActual.dni}" title="DNI" required="true" requiredMessage="Debe introducirse un DNI"/>
+                        <h:message for="dni"/>
+                        
+                        <h:outputLabel value="Num. Colegiado (*):" for="col" />
+                        <h:inputText id="col" value="#{medicoControlador.medicoActual.numeroColegiado}" title="Num. Colegiado" required="true" requiredMessage="Debe introducirse un numero de colegiado"/>
+                        <h:message for="col"/>
+                        
+                        <h:outputLabel value="Telefono:" for="tel" />
+                        <h:inputText id="tel" value="#{medicoControlador.medicoActual.telefono}" title="Telefono" required="false"/>
+                        <h:message for="tel"/>
+
+                        <h:outputLabel value="Email" for="email" />
+                        <h:inputText id="email" value="#{medicoControlador.medicoActual.email}" title="Email" required="false"/>
+                        <h:message for="email"/>
+                        
+                        <h:outputLabel value="Password (*):" for="password" />
+                        <h:inputSecret id="password" value="#{medicoControlador.password}" title="Password" required="true" requiredMessage="Debe introducirse un password"/>
+                        <h:message for="password"/>
+
+                        <h:outputLabel value="Repetir password (*):" for="password2" />
+                        <h:inputSecret id="password2" value="#{medicoControlador.password2}" title="Password2" required="true" requiredMessage="Debe repetir su password"/>
+                        <h:message for="password2"/>
+
+                        <h:outputLabel/>
+
+                    </h:panelGrid>
+                    <h:commandButton value="Guardar" action="#{medicoControlador.doGuardar()}"/>
+                </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

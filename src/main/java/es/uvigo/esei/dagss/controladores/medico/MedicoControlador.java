@@ -6,6 +6,7 @@ package es.uvigo.esei.dagss.controladores.medico;
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
+import es.uvigo.esei.dagss.dominio.daos.UsuarioDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.TipoUsuario;
 import javax.inject.Named;
@@ -29,6 +30,7 @@ public class MedicoControlador implements Serializable {
     private String dni;
     private String numeroColegiado;
     private String password;
+    private String password2;
 
     @Inject
     private AutenticacionControlador autenticacionControlador;
@@ -36,7 +38,8 @@ public class MedicoControlador implements Serializable {
 
     @EJB
     private MedicoDAO medicoDAO;
-
+    @EJB
+    UsuarioDAO usuarioDAO;
     /**
      * Creates a new instance of AdministradorControlador
      */
@@ -62,9 +65,18 @@ public class MedicoControlador implements Serializable {
     public String getPassword() {
         return password;
     }
+    
+    public String getPassword2() {
+        return password2;
+    }
+    
+    public void setPassword2(String pass2) {
+        this.password2 = pass2;
+    }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String pass) {
+            this.password = pass;
+        
     }
 
     public Medico getMedicoActual() {
@@ -109,6 +121,31 @@ public class MedicoControlador implements Serializable {
             }
         }
         return destino;
+    }
+    
+    private boolean passwordsVacios() {
+        if ((password == null) && (password2 == null)) {
+            return true;
+        } else {
+            return (password.isEmpty() && password2.isEmpty());
+        }
+    }
+    
+    public void doGuardar() {
+        if (passwordsVacios()) { // No modifica password
+            // Actualiza 
+            medicoActual = medicoDAO.actualizar(medicoActual);
+
+        } else if (password.equals(password2)) {
+            // Actualiza
+            medicoActual = medicoDAO.actualizar(medicoActual);
+
+
+            // Ajustar su password 
+            usuarioDAO.actualizarPassword(medicoActual.getId(), password);
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Passwords incorrectos (no coincidencia)", ""));
+        }
     }
     
     //Acciones
